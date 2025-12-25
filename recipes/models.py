@@ -9,13 +9,24 @@ class Category(models.Model):
 
 
 class Recipe(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes")
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="recipes"
+    )
+
     title = models.CharField(max_length=200)
     description = models.TextField()
-    ingredients = models.TextField()  # comma-separated or JSON later
+    ingredients = models.TextField()
     instructions = models.TextField()
     cooking_time = models.IntegerField(help_text="Time in minutes")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+
+    category = models.ForeignKey(
+        Category,
+        related_name="recipes",
+        on_delete=models.CASCADE,
+        null=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 

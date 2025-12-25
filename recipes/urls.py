@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import (
+    RegisterView,
+    LoginView,
     CategoryListCreate,
     CategoryDetail,
     RecipeListCreate,
@@ -7,6 +9,8 @@ from .views import (
 )
 
 urlpatterns = [
+    path('register/', RegisterView.as_view()),
+    path('login/', LoginView.as_view()),
     path('categories/', CategoryListCreate.as_view(), name='category-list'),
     path('categories/<int:pk>/', CategoryDetail.as_view(), name='category-detail'),
 
